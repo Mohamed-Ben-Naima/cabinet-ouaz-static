@@ -152,8 +152,8 @@ header.site {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   border: 1px solid rgba(32, 30, 27, 0.15);
   background: transparent;
@@ -231,8 +231,8 @@ header.site {
   background: var(--ink);
   color: var(--ivory);
   border-radius: 999px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   font-size: 0.875rem;
   font-weight: 500;
@@ -305,6 +305,15 @@ header.site {
   line-height: 1.7;
 }
 .hero .cta-row { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+
+/* Short viewports (landscape phones): keep the CTA on-screen instead of past the fold */
+@media (max-height: 640px) {
+  .hero { min-height: auto; padding-top: 88px; }
+  .hero-content { padding-bottom: 32px; }
+  .hero h1 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+  .hero p { margin-top: 12px; }
+  .hero .cta-row { margin-top: 20px; }
+}
 
 /* Sections */
 section { padding: clamp(56px, 12vw, 96px) 0; }
