@@ -49,18 +49,38 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
 <header class="site">
-  <div class="wrap">
+  <div class="wrap nav-wrap">
     <a class="brand" href="#top">
       <img src="/assets/logo.png" alt="Cabinet Dentaire Dr. Sarra Ouaz" width="36" height="36" />
       <span>Dr. Sarra Ouaz</span>
     </a>
-    <a class="header-call" href="tel:+21620933449">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5L16 13l4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      20 933 449
-    </a>
+
+    <nav class="nav" id="site-nav" aria-label="Navigation principale">
+      <a href="#about">À propos</a>
+      <a href="#services">Services</a>
+      <a href="#results">Réalisations</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="header-call" href="tel:+21620933449">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5L16 13l4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="call-text">20 933 449</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Ouvrir le menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
   </div>
 </header>
+
+<main id="main-content">
 
 <section id="top" class="hero">
   <div class="hero-bg">
@@ -85,7 +105,7 @@
   </div>
 </section>
 
-<section class="about">
+<section id="about" class="about">
   <div class="wrap grid">
     <div>
       <p class="eyebrow">À propos</p>
@@ -102,7 +122,7 @@
   </div>
 </section>
 
-<section class="services">
+<section id="services" class="services">
   <div class="wrap">
     <p class="eyebrow">Services</p>
     <h2>Des soins pour toute la famille</h2>
@@ -124,7 +144,7 @@
   </div>
 </section>
 
-<section class="results">
+<section id="results" class="results">
   <div class="wrap">
     <p class="eyebrow">Exemples de soins</p>
     <h2>Quelques cas suivis au cabinet</h2>
@@ -137,7 +157,7 @@
   </div>
 </section>
 
-<section class="review">
+<section id="avis" class="review">
   <div class="wrap">
     <svg viewBox="0 0 32 24" aria-hidden="true"><path fill="currentColor" d="M0 24V14.4Q0 7.6 3.6 3.8 7.2 0 13.2 0v5.2q-3.4 0-5 2-1.6 2-1.6 5.2h6.2V24Zm18.8 0V14.4q0-6.8 3.6-10.6Q26 0 32 0v5.2q-3.4 0-5 2-1.6 2-1.6 5.2h6.2V24Z"/></svg>
     <blockquote>Une jeune dentiste sympa et compétente. Merci dr. Sarra!</blockquote>
@@ -145,7 +165,7 @@
   </div>
 </section>
 
-<section class="hours">
+<section id="contact" class="hours">
   <div class="wrap grid">
     <div>
       <h2>Nous trouver à Hiboun</h2>
@@ -185,6 +205,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="site">
   <div class="wrap footer-grid">
     <div class="footer-col footer-brand">
@@ -220,6 +242,45 @@
   </div>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+(function () {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  function closeMenu() {
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Ouvrir le menu');
+  }
+  function openMenu() {
+    nav.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Fermer le menu');
+  }
+
+  toggle.addEventListener('click', function () {
+    if (nav.classList.contains('is-open')) closeMenu(); else openMenu();
+  });
+
+  nav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('is-open')) return;
+    if (nav.contains(e.target) || toggle.contains(e.target)) return;
+    closeMenu();
+  });
+
+  window.matchMedia('(min-width: 860px)').addEventListener('change', closeMenu);
+})();
+</script>
 </body>
 </html>
