@@ -70,7 +70,6 @@ header.site {
   height: 64px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   position: relative;
 }
@@ -124,6 +123,7 @@ header.site {
     box-shadow: none;
     padding: 0;
     gap: 28px;
+    margin-left: 44px;
   }
   .nav a {
     padding: 4px 0;
@@ -144,7 +144,7 @@ header.site {
   .nav a:hover::after { right: 0; }
 }
 
-.nav-actions { display: flex; align-items: center; gap: 10px; }
+.nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 
 .nav-toggle {
   display: inline-flex;
@@ -228,7 +228,7 @@ header.site {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--ink);
+  background: var(--teal);
   color: var(--ivory);
   border-radius: 999px;
   width: 44px;
@@ -236,6 +236,7 @@ header.site {
   padding: 0;
   font-size: 0.875rem;
   font-weight: 500;
+  box-shadow: 0 8px 20px -12px rgba(20, 67, 60, 0.55);
   transition: transform 0.2s;
   flex-shrink: 0;
 }
