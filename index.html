@@ -140,10 +140,10 @@
         <li><span class="n">04</span><span class="label">Extractions et petite chirurgie</span></li>
       </ul>
       <div class="photo-strip">
-        <img src="/assets/photos/chair.jpg" alt="Salle de soins du cabinet" loading="lazy" />
-        <img src="/assets/photos/desk.jpg" alt="Bureau de consultation" loading="lazy" />
-        <img src="/assets/photos/waiting-room-0.jpg" alt="Salle d'attente du cabinet" loading="lazy" />
-        <img src="/assets/photos/kids-corner.jpg" alt="Coin dédié aux enfants dans la salle d'attente" loading="lazy" />
+        <div class="frame"><img src="/assets/photos/chair.jpg" alt="Salle de soins du cabinet" loading="lazy" /></div>
+        <div class="frame"><img src="/assets/photos/desk.jpg" alt="Bureau de consultation" loading="lazy" /></div>
+        <div class="frame"><img src="/assets/photos/waiting-room-0.jpg" alt="Salle d'attente du cabinet" loading="lazy" /></div>
+        <div class="frame"><img src="/assets/photos/kids-corner.jpg" alt="Coin dédié aux enfants dans la salle d'attente" loading="lazy" /></div>
       </div>
     </div>
   </div>
@@ -154,9 +154,9 @@
     <p class="eyebrow">Exemples de soins</p>
     <h2>Quelques cas suivis au cabinet</h2>
     <div class="grid">
-      <img src="/assets/photos/results-1.jpg" alt="Exemple de soin réalisé au cabinet, avant et après" loading="lazy" />
-      <img src="/assets/photos/results-2.jpg" alt="Exemple de soin réalisé au cabinet, avant et après" loading="lazy" />
-      <img src="/assets/photos/results-3.jpg" alt="Exemple de soin réalisé au cabinet, avant et après" loading="lazy" />
+      <div class="frame"><img src="/assets/photos/results-1.jpg" alt="Exemple de soin réalisé au cabinet, avant et après" loading="lazy" /></div>
+      <div class="frame"><img src="/assets/photos/results-2.jpg" alt="Exemple de soin réalisé au cabinet, avant et après" loading="lazy" /></div>
+      <div class="frame"><img src="/assets/photos/results-3.jpg" alt="Exemple de soin réalisé au cabinet, avant et après" loading="lazy" /></div>
     </div>
     <p class="results-caption">Photos réelles de soins suivis au cabinet, partagées à titre indicatif. Chaque cas est différent&nbsp;: contactez le cabinet pour un avis personnalisé.</p>
   </div>
@@ -295,6 +295,85 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 
   window.matchMedia('(min-width: 860px)').addEventListener('change', closeMenu);
+})();
+
+(function () {
+  var header = document.querySelector('header.site');
+  if (!header) return;
+  function onScroll() {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  }
+  onScroll();
+  document.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function () {
+    // One orchestrated entrance for the hero on load.
+    gsap.from(['.hero h1', '.hero p', '.hero .cta-row'], {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'power2.out',
+      stagger: 0.12,
+      delay: 0.15
+    });
+
+    // Slow parallax drift on the hero footage as it scrolls past (kept within
+    // the -8%/-8% buffer already reserved on .hero-bg for the Ken Burns zoom).
+    gsap.to('.hero-bg', {
+      yPercent: 8,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 }
+    });
+
+    // Reveals a single element when it scrolls into view.
+    function reveal(selector, vars) {
+      document.querySelectorAll(selector).forEach(function (el) {
+        gsap.from(el, Object.assign({
+          opacity: 0,
+          y: 16,
+          duration: 0.6,
+          ease: 'power1.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' }
+        }, vars));
+      });
+    }
+
+    // Reveals a set of items inside a container together, staggered, on one shared trigger.
+    function revealStagger(containerSelector, itemsSelector, vars) {
+      document.querySelectorAll(containerSelector).forEach(function (container) {
+        var items = container.querySelectorAll(itemsSelector);
+        if (!items.length) return;
+        gsap.from(items, Object.assign({
+          opacity: 0,
+          y: 16,
+          duration: 0.5,
+          ease: 'power1.out',
+          stagger: 0.08,
+          scrollTrigger: { trigger: container, start: 'top 88%', toggleActions: 'play none none reverse' }
+        }, vars));
+      });
+    }
+
+    revealStagger('#about .grid > div:first-child', '.eyebrow, h2, .lede, .about-note');
+    reveal('.about-media', { y: 0, scale: 1.05, duration: 0.7 });
+    revealStagger('#services .wrap', '.eyebrow, h2');
+    revealStagger('.service-list', 'li', { stagger: 0.06 });
+    revealStagger('.photo-strip', '.frame', { stagger: 0.06 });
+    revealStagger('#results .grid', '.frame', { stagger: 0.1 });
+    revealStagger('#results .wrap', '.eyebrow, h2');
+    revealStagger('.review .wrap', 'svg, blockquote, cite', { stagger: 0.1 });
+    revealStagger('#contact .grid > div:first-child', 'h2, .info-row, .cta-row');
+    reveal('.map-frame', { y: 0, scale: 1.03, duration: 0.7 });
+  });
 })();
 </script>
 </body>

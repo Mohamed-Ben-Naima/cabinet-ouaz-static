@@ -65,6 +65,12 @@ header.site {
   background: rgba(250, 248, 244, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(32, 30, 27, 0.1);
+  box-shadow: 0 20px 40px -32px rgba(20, 30, 27, 0);
+  transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+}
+header.site.is-scrolled {
+  background: rgba(250, 248, 244, 0.98);
+  box-shadow: 0 20px 40px -28px rgba(20, 30, 27, 0.35);
 }
 .nav-wrap {
   height: 64px;
@@ -348,7 +354,13 @@ h2 {
   .about .grid { grid-template-columns: 1fr 1fr; }
 }
 .about-media { border-radius: 20px; overflow: hidden; will-change: transform; }
-.about-media img { aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+.about-media img {
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.about-media:hover img { transform: scale(1.045); }
 .about-note {
   margin-top: 20px;
   display: flex;
@@ -383,7 +395,14 @@ h2 {
 .service-list .n { font-family: var(--font-mono); font-size: 0.875rem; color: var(--teal); }
 .service-list .label { font-size: 1.125rem; }
 .photo-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.photo-strip img { aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; width: 100%; }
+.photo-strip .frame { aspect-ratio: 1/1; border-radius: 16px; overflow: hidden; }
+.photo-strip .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.photo-strip .frame:hover img { transform: scale(1.06); }
 
 /* Results */
 .results .grid {
@@ -392,7 +411,14 @@ h2 {
   gap: 16px;
   margin-top: 40px;
 }
-.results .grid img { aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; width: 100%; }
+.results .grid .frame { aspect-ratio: 1/1; border-radius: 16px; overflow: hidden; }
+.results .grid .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.results .grid .frame:hover img { transform: scale(1.06); }
 .results-caption { margin-top: 20px; font-size: 0.875rem; color: rgba(32,30,27,0.6); }
 
 /* Review */
