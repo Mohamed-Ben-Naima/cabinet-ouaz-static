@@ -268,20 +268,23 @@ header.site {
   inset: -8% -0% -8% 0;
   will-change: transform;
 }
-.hero-bg img {
+.hero-bg img,
+.hero-bg video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: kenburns 22s ease-in-out infinite alternate;
+  animation: kenburns 34s ease-in-out infinite alternate;
 }
 @keyframes kenburns {
   from { transform: scale(1.02) translate(0, 0); }
-  to { transform: scale(1.12) translate(-1%, -1%); }
+  to { transform: scale(1.13) translate(-1.5%, -1%); }
 }
 .hero-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(20,30,27,0.92), rgba(20,30,27,0.42) 55%, rgba(20,30,27,0.18));
+  background:
+    radial-gradient(120% 90% at 50% 100%, rgba(10, 16, 14, 0.35), transparent 65%),
+    linear-gradient(to top, rgba(11, 18, 16, 0.95), rgba(15, 24, 21, 0.5) 52%, rgba(15, 24, 21, 0.22));
 }
 .hero-content {
   position: relative;

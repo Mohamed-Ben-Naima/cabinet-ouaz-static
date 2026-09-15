@@ -84,7 +84,12 @@
 
 <section id="top" class="hero">
   <div class="hero-bg">
-    <img src="/assets/photos/hero-entrance.jpg" alt="Entrée du cabinet dentaire Dr. Sarra Ouaz" fetchpriority="high" />
+    <video muted loop playsinline preload="auto" poster="/assets/photos/hero-poster.jpg" aria-hidden="true">
+      <source media="(max-width: 767px)" src="/assets/video/hero-mobile.mp4" type="video/mp4" />
+      <source src="/assets/video/hero.webm" type="video/webm" />
+      <source src="/assets/video/hero.mp4" type="video/mp4" />
+      <img src="/assets/photos/hero-poster.jpg" alt="Salle de soins du cabinet dentaire Dr. Sarra Ouaz" fetchpriority="high" />
+    </video>
   </div>
   <div class="hero-scrim"></div>
   <div class="wrap hero-content">
@@ -244,6 +249,16 @@
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+(function () {
+  var video = document.querySelector('.hero-bg video');
+  if (!video) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (!reduceMotion && !saveData) {
+    video.play().catch(function () {});
+  }
+})();
 
 (function () {
   var toggle = document.getElementById('nav-toggle');
