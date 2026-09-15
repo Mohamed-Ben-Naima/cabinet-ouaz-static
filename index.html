@@ -60,6 +60,7 @@
 
     <nav class="nav" id="site-nav" aria-label="Navigation principale">
       <a href="#about">À propos</a>
+      <a href="#doctor">Docteur</a>
       <a href="#services">Services</a>
       <a href="#results">Réalisations</a>
       <a href="#avis">Avis</a>
@@ -123,6 +124,24 @@
     </div>
     <div class="about-media">
       <img src="/assets/photos/overview.jpg" alt="Salle de soins du cabinet dentaire Dr. Sarra Ouaz" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section id="doctor" class="doctor">
+  <div class="wrap grid">
+    <div class="doctor-media">
+      <img src="/assets/photos/dr-sarra-tv.jpg" alt="Dr. Sarra Ouaz invitée sur le plateau d'Insen TV" loading="lazy" />
+      <span class="media-badge">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 3l4 3 4-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Invitée sur Insen TV
+      </span>
+    </div>
+    <div>
+      <p class="eyebrow">Le docteur</p>
+      <h2>Dr. Sarra Ouaz</h2>
+      <p class="lede">Diplômée en chirurgie dentaire, le Dr. Sarra Ouaz reçoit ses patients à Hiboun avec la même attention pour un simple contrôle comme pour un soin plus délicat. Son approche calme et pédagogique en fait une référence appréciée, y compris auprès des plus jeunes patients.</p>
+      <p class="lede">Régulièrement sollicitée pour partager son expertise, elle a notamment été invitée sur le plateau d'Insen TV pour évoquer la santé bucco-dentaire.</p>
     </div>
   </div>
 </section>
@@ -365,6 +384,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
     revealStagger('#about .grid > div:first-child', '.eyebrow, h2, .lede, .about-note');
     reveal('.about-media', { y: 0, scale: 1.05, duration: 0.7 });
+    reveal('.doctor-media', { y: 0, scale: 1.05, duration: 0.7 });
+    revealStagger('#doctor .grid > div:last-child', '.eyebrow, h2, .lede');
     revealStagger('#services .wrap', '.eyebrow, h2');
     revealStagger('.service-list', 'li', { stagger: 0.06 });
     revealStagger('.photo-strip', '.frame', { stagger: 0.06 });
